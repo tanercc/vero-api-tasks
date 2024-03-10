@@ -68,6 +68,7 @@ class Api
 						$params = [new $target['bodyType']($data)];
 						try {
 							$params[0] = (new Validation($params[0]))->validate();
+							$params[0]->duration = Calculate::duration($params[0]);
 						} catch (Exception $e) {
 							$response = ['error' => $e->getMessage()];
 							break;

@@ -87,7 +87,7 @@ class ConstructionStages
 		$sql_vars = [];
 		$sql_values = [];
 		foreach (get_object_vars($data) as $key => $value) {
-			if ($value) {
+			if ($value !== null) {
 				$sql_vars[] = (strpos($key, 'Date') === false ? $key : $this->camelCaseToSnakeCase($key)) . ' = :' . $key;
 				$sql_values[$key] = $value;
 			}

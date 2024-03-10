@@ -1,5 +1,6 @@
 <?php
 
+
 class Validation
 {
 	/**
@@ -17,7 +18,14 @@ class Validation
 
 	private $data;
 
-	public function __construct($data)
+	/**
+	 * Validate ConstructionStages data
+	 * If it is valid return with default values
+	 * Throw an exception if the data is invalid
+	 * @param ConstructionStagesCreate $data
+	 * @throws Exception
+	 */
+	public function __construct(ConstructionStagesCreate $data)
 	{
 		$this->data = $data;
 		return $this->validate($data);
