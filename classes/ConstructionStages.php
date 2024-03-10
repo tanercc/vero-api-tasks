@@ -67,4 +67,60 @@ class ConstructionStages
 		]);
 		return $this->getSingle($this->db->lastInsertId());
 	}
+
+	/**
+	 * Update a construction stage
+	 * @param ConstructionStagesCreate $data
+	 * @param $id
+	 * @return array
+	 */
+	public function patch(ConstructionStagesCreate $data, $id)
+	{
+		$proper_statuses = [
+			'NEW',
+			'PLANNED',
+			'DELETED',
+		];
+		if ($data->status && !in_array($data->status, $proper_statuses)) {
+			return ['error' => 'Invalid status'];
+		}
+		$sql_vars = [];
+		$sql_values = [];
+		foreach (get_object_vars($data) as $key => $value) {
+			if ($value) {
+				$sql_vars[] = (strpos($key, 'Date') === false ? $key : $this->camelCaseToSnakeCase($key)) . ' = :' . $key;
+				$sql_values[$key] = $value;
+			}
+		}
+		$sql = 'UPDATE construction_stages SET ' . implode(', ', $sql_vars) . ' WHERE ID = :id';
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array_merge($sql_values, ['id' => $id]));
+		return $this->getSingle($id);
+	}
+
+	/**
+	 * Delete a construction stage
+	 * @param $id
+	 * @return array
+	 */
+	public function delete($id)
+	{
+		$stmt = $this->db->prepare("
+            UPDATE construction_stages
+            SET status = 'DELETED'
+            WHERE ID = :id
+        ");
+		$stmt->execute(['id' => $id]);
+		return $this->getSingle($id);
+	}
+
+	/**
+	 * Convert camelCase to snake_case
+	 * @param $str
+	 * @return string
+	 */
+	private function camelCaseToSnakeCase($str)
+	{
+		return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $str));
+	}
 }
