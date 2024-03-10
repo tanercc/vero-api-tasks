@@ -61,7 +61,17 @@ class Api
 					array_shift($matches);
 					if (in_array($httpVerb, ['post', 'patch'])) {
 						$data = json_decode(file_get_contents('php://input'));
+						if (json_last_error() !== JSON_ERROR_NONE) {
+							$response = ['error' => 'Invalid JSON'];
+							break;
+						}
 						$params = [new $target['bodyType']($data)];
+						try {
+							$params[0] = (new Validation($params[0]))->validate();
+						} catch (Exception $e) {
+							$response = ['error' => $e->getMessage()];
+							break;
+						}
 					}
 					$params = array_merge($params, $matches);
 					$response = call_user_func_array([new $target['class'], $target['method']], $params);
