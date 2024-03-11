@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "vero-api-tasks",
+    "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+  },
+  "item": [
+    {
+      "name": "get constructionStages",
+      "request": {
+        "method": "get",
+        "url": "http:\/\/localhost:8080\/constructionStages"
+      }
+    },
+    {
+      "name": "get constructionStages\/(:num)",
+      "request": {
+        "method": "get",
+        "url": "http:\/\/localhost:8080\/constructionStages\/(:num)"
+      }
+    },
+    {
+      "name": "post constructionStages",
+      "request": {
+        "method": "post",
+        "url": "http:\/\/localhost:8080\/constructionStages",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":null,\"startDate\":null,\"endDate\":null,\"duration\":null,\"durationUnit\":null,\"color\":null,\"externalId\":null,\"status\":null}"
+        }
+      }
+    },
+    {
+      "name": "patch constructionStages\/(:num)",
+      "request": {
+        "method": "patch",
+        "url": "http:\/\/localhost:8080\/constructionStages\/(:num)",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":null,\"startDate\":null,\"endDate\":null,\"duration\":null,\"durationUnit\":null,\"color\":null,\"externalId\":null,\"status\":null}"
+        }
+      }
+    },
+    {
+      "name": "delete constructionStages\/(:num)",
+      "request": {
+        "method": "delete",
+        "url": "http:\/\/localhost:8080\/constructionStages\/(:num)"
+      }
+    },
+    {
+      "name": "options constructionStages",
+      "request": {
+        "method": "options",
+        "url": "http:\/\/localhost:8080\/constructionStages"
+      }
+    }
+  ]
+}

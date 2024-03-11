@@ -5,7 +5,7 @@ class APIDoc
 
 	private $apiDoc = [
 		"info" => [
-			"name" => "vero-api-tests",
+			"name" => "vero-api-tasks",
 			"schema" => "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		],
 		"item" => [],
