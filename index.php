@@ -46,6 +46,10 @@ class Api
 				'class' => 'ConstructionStages',
 				'method' => 'delete',
 			],
+			'options constructionStages' => [
+				'class' => 'APIDoc',
+				'method' => 'options',
+			],
 		];
 
 		$response = [
@@ -73,6 +77,8 @@ class Api
 							$response = ['error' => $e->getMessage()];
 							break;
 						}
+					} else if ($httpVerb === 'options') {
+						$params[0] = $routes;
 					}
 					$params = array_merge($params, $matches);
 					$response = call_user_func_array([new $target['class'], $target['method']], $params);

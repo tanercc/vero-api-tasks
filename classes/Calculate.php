@@ -18,7 +18,7 @@ class Calculate
 		$startDate = new DateTime($data->startDate);
 		$endDate = new DateTime($data->endDate);
 		$interval = $startDate->diff($endDate);
-		var_dump($interval);
+
 		switch ($data->durationUnit) {
 			case 'HOURS':
 				return $interval->h;
